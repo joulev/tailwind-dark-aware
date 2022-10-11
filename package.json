@@ -1,0 +1,12 @@
+{
+  "name": "tailwind-dark-aware",
+  "version": "unreleased",
+  "description": "Tailwind CSS plugin to generate shorthands for light mode and dark mode classes.",
+  "main": "dist/index.js",
+  "keywords": [
+    "tailwindcss",
+    "dark mode"
+  ],
+  "author": "Vu Van Dung",
+  "license": "MIT"
+}
