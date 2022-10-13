@@ -1,7 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: ["./pages/**/*.tsx"],
-  theme: {
-    extend: {},
-  },
+  content: [require("path").join(__dirname, "pages/**/*.tsx")],
+  theme: { extend: {} },
+  plugins: [require("../dist/index.js")],
 };

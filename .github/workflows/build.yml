@@ -15,5 +15,4 @@ jobs:
           node-version: 16
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: cat dist/index.js
+      - run: pnpm main:build # for now

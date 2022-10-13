@@ -1,3 +1,9 @@
-export function isOdd(n: number): boolean {
-  return n % 2 === 1;
-}
+import * as plugin from "tailwindcss/plugin";
+
+export = plugin(({ addComponents }) => {
+  addComponents({
+    ".test-class": {
+      color: "red",
+    },
+  });
+});
