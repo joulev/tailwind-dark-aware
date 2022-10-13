@@ -4,14 +4,16 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   content: [require("path").join(__dirname, "pages/**/*.tsx")],
   theme: {
-    colors: {
-      short: "black",
-      "my-own-color": {
-        DEFAULT: "#ff0000",
-        "very-nested": {
-          "in-more-level": colors.blue,
+    extend: {
+      colors: {
+        short: "black",
+        "my-own-color": {
+          DEFAULT: "#ff0000",
+          "very-nested": {
+            "in-more-level": colors.blue,
+          },
+          ...colors.green,
         },
-        ...colors.green,
       },
     },
   },

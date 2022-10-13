@@ -32,6 +32,7 @@
     "tailwindcss": ">=3.0.0 || insiders"
   },
   "devDependencies": {
+    "@types/color": "^3.0.3",
     "@types/node": "18.8.4",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
@@ -46,5 +47,8 @@
     "react-dom": "18.2.0",
     "tailwindcss": "latest",
     "typescript": "4.8.4"
+  },
+  "dependencies": {
+    "color": "4.2.3"
   }
 }
