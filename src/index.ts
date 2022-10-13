@@ -7,15 +7,25 @@ export = plugin(({ matchUtilities, theme }) => {
   matchUtilities(
     {
       "text-wd": (value: string | [string, string]) => {
-        if (typeof value === "string")
-          return { color: value, "@media (prefers-color-scheme: dark)": { color: value } };
+        if (typeof value === "string") {
+          const [h, s, l] = Color(value).hsl().array();
+          const invert = Color.hsl(h, s, 100 - l);
+          return {
+            color: value,
+            "@media (prefers-color-scheme: dark)": { color: invert.hex() },
+          };
+        }
+
         const [palette, shade] = value;
         const prefix = palette === "" ? "textColor" : `textColor.${palette}`;
-        if (shade === "DEFAULT")
+
+        if (shade === "DEFAULT") {
+          const color = theme(`${prefix}.DEFAULT`) as string;
           return {
-            color: theme(`${prefix}.DEFAULT`),
-            "@media (prefers-color-scheme: dark)": { color: theme(`${prefix}.DEFAULT`) },
+            color,
+            "@media (prefers-color-scheme: dark)": { color },
           };
+        }
 
         const paletteColours = (
           Object.entries(theme(prefix) as ColourObject).filter(
@@ -34,6 +44,7 @@ export = plugin(({ matchUtilities, theme }) => {
           paletteColours[
             paletteColours.length - 1 - paletteColours.findIndex(([key]) => key === shade)
           ][1];
+
         return {
           color: thisColour,
           "@media (prefers-color-scheme: dark)": {
