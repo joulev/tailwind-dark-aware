@@ -4,6 +4,7 @@
     "target": "es2020", // node 14
     "lib": ["es2020"],
     "declaration": true,
+    "strict": true,
     "outDir": "./dist",
     "rootDir": "./src"
   },
