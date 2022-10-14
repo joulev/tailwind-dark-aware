@@ -3,23 +3,23 @@ import colourToCSS from "./utils/colour-to-css";
 import invertColour from "./utils/invert-colour";
 import flattenPalette from "./utils/flatten-palette";
 import getInvertInPalette from "./utils/get-invert-in-palette";
-import type { ColourObject, ColourInfo, CSSRuleObject } from "$types";
+import type { ColourObject, ColourInfo, GenerateUtilsProps } from "$types";
 
 export = plugin(({ matchUtilities, theme, corePlugins }) => {
   const suffix = "wd";
 
-  function generateUtility(
-    clsName: string,
-    cssSelector: string,
-    cssProp: string | string[],
-    themeName: string,
-    opacityPlugin?: string,
-    opacityVar?: string,
-    customCSS?: CSSRuleObject,
-  ) {
+  function generateUtility({
+    className,
+    cssSelector = "&",
+    cssProp,
+    themeName,
+    opacityPlugin,
+    opacityVar,
+    customCSS,
+  }: GenerateUtilsProps) {
     matchUtilities(
       {
-        [`${clsName}-${suffix}`]: (value: string | ColourInfo) => {
+        [`${className}-${suffix}`]: (value: string | ColourInfo) => {
           const cssOpacityVar =
             opacityPlugin && corePlugins(opacityPlugin) ? opacityVar : undefined;
           if (typeof value === "string")
@@ -43,83 +43,115 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
     );
   }
 
-  generateUtility(
-    "divide",
-    "& > :not([hidden]) ~ :not([hidden])",
-    "border-color",
-    "divideColor",
-    "divideOpacity",
-    "--tw-divide-opacity",
-  );
-
-  generateUtility(
-    "border",
-    "&",
-    "border-color",
-    "borderColor",
-    "borderOpacity",
-    "--tw-border-opacity",
-  );
-  generateUtility(
-    "border-x",
-    "&",
-    ["border-left-color", "border-right-color"],
-    "borderColor",
-    "borderOpacity",
-    "--tw-border-opacity",
-  );
-  generateUtility(
-    "border-y",
-    "&",
-    ["border-top-color", "border-bottom-color"],
-    "borderColor",
-    "borderOpacity",
-    "--tw-border-opacity",
-  );
-  for (const side of ["top", "right", "bottom", "left"]) {
-    generateUtility(
-      `border-${side.substring(0, 1)}`,
-      "&",
-      `border-${side}-color`,
-      "borderColor",
-      "borderOpacity",
-      "--tw-border-opacity",
-    );
-  }
-
-  generateUtility(
-    "bg",
-    "&",
-    "background-color",
-    "backgroundColor",
-    "backgroundOpacity",
-    "--tw-bg-opacity",
-  );
-
-  generateUtility("text", "&", "color", "textColor", "textOpacity", "--tw-text-opacity");
-
-  generateUtility("decoration", "&", "text-decoration-color", "textDecorationColor");
-
-  generateUtility(
-    "placeholder",
-    "&::placeholder",
-    "color",
-    "placeholderColor",
-    "placeholderOpacity",
-    "--tw-placeholder-opacity",
-  );
-
-  generateUtility("caret", "&", "caret-color", "caretColor");
-
-  generateUtility("accent", "&", "accent-color", "accentColor");
-
-  generateUtility("shadow", "&", "--tw-shadow-color", "boxShadowColor", undefined, undefined, {
-    "--tw-shadow": "var(--tw-shadow-colored)",
+  generateUtility({
+    className: "divide",
+    cssSelector: "& > :not([hidden]) ~ :not([hidden])",
+    cssProp: "border-color",
+    themeName: "divideColor",
+    opacityPlugin: "divideOpacity",
+    opacityVar: "--tw-divide-opacity",
   });
 
-  generateUtility("outline", "&", "outline-color", "outlineColor");
+  generateUtility({
+    className: "border",
+    cssProp: "border-color",
+    themeName: "borderColor",
+    opacityPlugin: "borderOpacity",
+    opacityVar: "--tw-border-opacity",
+  });
+  generateUtility({
+    className: "border-x",
+    cssProp: ["border-left-color", "border-right-color"],
+    themeName: "borderColor",
+    opacityPlugin: "borderOpacity",
+    opacityVar: "--tw-border-opacity",
+  });
+  generateUtility({
+    className: "border-y",
+    cssProp: ["border-top-color", "border-bottom-color"],
+    themeName: "borderColor",
+    opacityPlugin: "borderOpacity",
+    opacityVar: "--tw-border-opacity",
+  });
+  for (const side of ["top", "right", "bottom", "left"]) {
+    generateUtility({
+      className: `border-${side.substring(0, 1)}`,
+      cssProp: `border-${side}-color`,
+      themeName: "borderColor",
+      opacityPlugin: "borderOpacity",
+      opacityVar: "--tw-border-opacity",
+    });
+  }
 
-  generateUtility("ring", "&", "--tw-ring-color", "ringColor", "ringOpacity", "--tw-ring-opacity");
+  generateUtility({
+    className: "bg",
+    cssProp: "background-color",
+    themeName: "backgroundColor",
+    opacityPlugin: "backgroundOpacity",
+    opacityVar: "--tw-bg-opacity",
+  });
 
-  generateUtility("ring-offset", "&", "--tw-ring-offset-color", "ringOffsetColor");
+  generateUtility({
+    className: "text",
+    cssProp: "color",
+    themeName: "textColor",
+    opacityPlugin: "textOpacity",
+    opacityVar: "--tw-text-opacity",
+  });
+
+  generateUtility({
+    className: "decoration",
+    cssProp: "text-decoration-color",
+    themeName: "textDecorationColor",
+  });
+
+  generateUtility({
+    className: "placeholder",
+    cssSelector: "&::placeholder",
+    cssProp: "color",
+    themeName: "placeholderColor",
+    opacityPlugin: "placeholderOpacity",
+    opacityVar: "--tw-placeholder-opacity",
+  });
+
+  generateUtility({
+    className: "caret",
+    cssProp: "caret-color",
+    themeName: "caretColor",
+  });
+
+  generateUtility({
+    className: "accent",
+    cssProp: "accent-color",
+    themeName: "accentColor",
+  });
+
+  generateUtility({
+    className: "shadow",
+    cssProp: "--tw-shadow-color",
+    themeName: "boxShadowColor",
+    customCSS: {
+      "--tw-shadow": "var(--tw-shadow-colored)",
+    },
+  });
+
+  generateUtility({
+    className: "outline",
+    cssProp: "outline-color",
+    themeName: "outlineColor",
+  });
+
+  generateUtility({
+    className: "ring",
+    cssProp: "--tw-ring-color",
+    themeName: "ringColor",
+    opacityPlugin: "ringOpacity",
+    opacityVar: "--tw-ring-opacity",
+  });
+
+  generateUtility({
+    className: "ring-offset",
+    cssProp: "--tw-ring-offset-color",
+    themeName: "ringOffsetColor",
+  });
 });
