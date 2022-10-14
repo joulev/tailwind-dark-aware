@@ -6,17 +6,19 @@ import type { ColourObject, ColourInfo } from "$types";
 import getInvertInPalette from "./utils/get-invert-in-palette";
 
 export = plugin(({ matchUtilities, theme, corePlugins }) => {
+  const suffix = "wd";
+
   function generateUtility(
     clsName: string,
     cssSelector: string,
-    cssProp: string,
+    cssProp: string | string[],
     themeName: string,
     opacityPlugin: string,
     opacityVar: string,
   ) {
     matchUtilities(
       {
-        [clsName]: (value: string | ColourInfo) => {
+        [`${clsName}-${suffix}`]: (value: string | ColourInfo) => {
           const cssOpacityVar = corePlugins(opacityPlugin) ? opacityVar : undefined;
           if (typeof value === "string")
             return colourToCSS([value, invertColour(value)], cssSelector, cssProp, cssOpacityVar);
@@ -32,5 +34,116 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
     );
   }
 
-  generateUtility("text-wd", "&", "color", "textColor", "textOpacity", "--tw-text-opacity");
+  generateUtility(
+    "divide",
+    "& > :not([hidden]) ~ :not([hidden])",
+    "border-color",
+    "divideColor",
+    "divideOpacity",
+    "--tw-divide-opacity",
+  );
+
+  generateUtility(
+    "border",
+    "&",
+    "border-color",
+    "borderColor",
+    "borderOpacity",
+    "--tw-border-opacity",
+  );
+  generateUtility(
+    "border-x",
+    "&",
+    ["border-left-color", "border-right-color"],
+    "borderColor",
+    "borderOpacity",
+    "--tw-border-opacity",
+  );
+  generateUtility(
+    "border-y",
+    "&",
+    ["border-top-color", "border-bottom-color"],
+    "borderColor",
+    "borderOpacity",
+    "--tw-border-opacity",
+  );
+  for (const side of ["top", "right", "bottom", "left"]) {
+    generateUtility(
+      `border-${side.substring(0, 1)}`,
+      "&",
+      `border-${side}-color`,
+      "borderColor",
+      "borderOpacity",
+      "--tw-border-opacity",
+    );
+  }
+
+  generateUtility(
+    "bg",
+    "&",
+    "background-color",
+    "backgroundColor",
+    "backgroundOpacity",
+    "--tw-bg-opacity",
+  );
+
+  generateUtility("text", "&", "color", "textColor", "textOpacity", "--tw-text-opacity");
+
+  generateUtility(
+    "decoration",
+    "&",
+    "text-decoration-color",
+    "textDecorationColor",
+    "textOpacity", // TODO
+    "--tw-text-opacity",
+  );
+
+  generateUtility(
+    "placeholder",
+    "&::placeholder",
+    "color",
+    "placeholderColor",
+    "placeholderOpacity",
+    "--tw-placeholder-opacity",
+  );
+
+  generateUtility(
+    "caret",
+    "&",
+    "caret-color",
+    "caretColor",
+    "caretOpacity", // TODO
+    "--tw-caret-opacity",
+  );
+
+  generateUtility(
+    "accent",
+    "&",
+    "accent-color",
+    "accentColor",
+    "accentOpacity", // TODO
+    "--tw-accent-opacity",
+  );
+
+  // boxShadowColor: TODO
+
+  generateUtility(
+    "outline",
+    "&",
+    "outline-color",
+    "outlineColor",
+    "outlineOpacity", // TODO
+    "--tw-outline-opacity",
+  );
+
+  generateUtility("ring", "&", "--tw-ring-color", "ringColor", "ringOpacity", "--tw-ring-opacity");
+
+  generateUtility(
+    "ring-offset",
+    "&",
+    "--tw-ring-offset-color",
+    "ringOffsetColor",
+    "ringOffsetOpacity", // TODO
+    "--tw-ring-offset-opacity",
+  );
 });
