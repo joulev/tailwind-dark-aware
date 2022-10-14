@@ -2,8 +2,8 @@ import plugin from "tailwindcss/plugin";
 import colourToCSS from "./utils/colour-to-css";
 import invertColour from "./utils/invert-colour";
 import flattenPalette from "./utils/flatten-palette";
-import type { ColourObject, ColourInfo } from "$types";
 import getInvertInPalette from "./utils/get-invert-in-palette";
+import type { ColourObject, ColourInfo, CSSRuleObject } from "$types";
 
 export = plugin(({ matchUtilities, theme, corePlugins }) => {
   const suffix = "wd";
@@ -15,6 +15,7 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
     themeName: string,
     opacityPlugin?: string,
     opacityVar?: string,
+    customCSS?: CSSRuleObject,
   ) {
     matchUtilities(
       {
@@ -22,13 +23,20 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
           const cssOpacityVar =
             opacityPlugin && corePlugins(opacityPlugin) ? opacityVar : undefined;
           if (typeof value === "string")
-            return colourToCSS([value, invertColour(value)], cssSelector, cssProp, cssOpacityVar);
+            return colourToCSS(
+              [value, invertColour(value)],
+              cssSelector,
+              cssProp,
+              cssOpacityVar,
+              customCSS,
+            );
           const [palette, shade] = value;
           const prefix = palette === "" ? themeName : `${themeName}.${palette}`;
           const current = theme<string>(`${prefix}.${shade}`);
-          if (shade === "DEFAULT") return colourToCSS(current, cssSelector, cssProp, cssOpacityVar);
+          if (shade === "DEFAULT")
+            return colourToCSS(current, cssSelector, cssProp, cssOpacityVar, customCSS);
           const invert = getInvertInPalette(theme<ColourObject>(prefix), shade);
-          return colourToCSS([current, invert], cssSelector, cssProp, cssOpacityVar);
+          return colourToCSS([current, invert], cssSelector, cssProp, cssOpacityVar, customCSS);
         },
       },
       { values: flattenPalette(theme(themeName)), type: ["color"] },
@@ -105,7 +113,9 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
 
   generateUtility("accent", "&", "accent-color", "accentColor");
 
-  // boxShadowColor: TODO
+  generateUtility("shadow", "&", "--tw-shadow-color", "boxShadowColor", undefined, undefined, {
+    "--tw-shadow": "var(--tw-shadow-colored)",
+  });
 
   generateUtility("outline", "&", "outline-color", "outlineColor");
 

@@ -23,15 +23,27 @@ export default function colourToCSS(
   colour: string | [string, string],
   selector: string,
   property: string | string[],
-  variable?: string,
+  variable: string | undefined,
+  customCSS?: CSSRuleObject,
 ): CSSRuleObject {
   const properties = Array.isArray(property) ? property : [property];
   if (typeof colour === "string")
-    return { [selector]: colourToCSSWithoutDark(colour, properties, variable) };
+    return {
+      [selector]: {
+        ...colourToCSSWithoutDark(colour, properties, variable),
+        ...customCSS,
+      },
+    };
   return {
-    [selector]: colourToCSSWithoutDark(colour[0], properties, variable),
+    [selector]: {
+      ...colourToCSSWithoutDark(colour[0], properties, variable),
+      ...customCSS,
+    },
     "@media (prefers-color-scheme: dark)": {
-      [selector]: colourToCSSWithoutDark(colour[1], properties, variable),
+      [selector]: {
+        ...colourToCSSWithoutDark(colour[1], properties, variable),
+        ...customCSS,
+      },
     },
   };
 }

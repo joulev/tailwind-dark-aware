@@ -43,5 +43,11 @@ it("Should work for multiple properties", () => {
 });
 
 it("Should also work if opacity core module is disabled", () => {
-  expect(colourToCSS("#000000", "&", "color")).toEqual({ "&": { color: "#000000" } });
+  expect(colourToCSS("#000000", "&", "color", undefined)).toEqual({ "&": { color: "#000000" } });
+});
+
+it("Should work with custom CSS added", () => {
+  expect(colourToCSS("#000000", "&", "color", undefined, { "font-size": "1rem" })).toEqual({
+    "&": { color: "#000000", "font-size": "1rem" },
+  });
 });
