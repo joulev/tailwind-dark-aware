@@ -6,21 +6,30 @@ import type { ColourObject, ColourInfo } from "$types";
 import getInvertInPalette from "./utils/get-invert-in-palette";
 
 export = plugin(({ matchUtilities, theme, corePlugins }) => {
-  matchUtilities(
-    {
-      "text-wd": (value: string | ColourInfo) => {
-        const cssProp = "color";
-        const cssOpacityVar = corePlugins("textOpacity") ? "--tw-text-opacity" : undefined;
-        if (typeof value === "string")
-          return colourToCSS([value, invertColour(value)], cssProp, cssOpacityVar);
-        const [palette, shade] = value;
-        const prefix = palette === "" ? "textColor" : `textColor.${palette}`;
-        const current = theme<string>(`${prefix}.${shade}`);
-        if (shade === "DEFAULT") return colourToCSS(current, cssProp, cssOpacityVar);
-        const invert = getInvertInPalette(theme<ColourObject>(prefix), shade);
-        return colourToCSS([current, invert], cssProp, cssOpacityVar);
+  function generateUtility(
+    clsName: string,
+    cssProp: string,
+    themeName: string,
+    opacityPlugin: string,
+    opacityVar: string,
+  ) {
+    matchUtilities(
+      {
+        [clsName]: (value: string | ColourInfo) => {
+          const cssOpacityVar = corePlugins(opacityPlugin) ? opacityVar : undefined;
+          if (typeof value === "string")
+            return colourToCSS([value, invertColour(value)], cssProp, cssOpacityVar);
+          const [palette, shade] = value;
+          const prefix = palette === "" ? themeName : `${themeName}.${palette}`;
+          const current = theme<string>(`${prefix}.${shade}`);
+          if (shade === "DEFAULT") return colourToCSS(current, cssProp, cssOpacityVar);
+          const invert = getInvertInPalette(theme<ColourObject>(prefix), shade);
+          return colourToCSS([current, invert], cssProp, cssOpacityVar);
+        },
       },
-    },
-    { values: flattenPalette(theme("textColor")), type: ["color"] },
-  );
+      { values: flattenPalette(theme(themeName)), type: ["color"] },
+    );
+  }
+
+  generateUtility("text-wd", "color", "textColor", "textOpacity", "--tw-text-opacity");
 });
