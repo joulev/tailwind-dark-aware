@@ -5,8 +5,9 @@ import Color from "color";
 function colourToCSSWithoutDark(
   colour: string,
   properties: string[],
-  variable: string,
+  variable?: string,
 ): CSSRuleObject {
+  if (!variable) return Object.fromEntries(properties.map((prop) => [prop, colour]));
   const parsed = Color(colour);
   if (!parsed || parsed.alpha() !== 1)
     return Object.fromEntries(properties.map((prop) => [prop, colour]));
@@ -21,7 +22,7 @@ function colourToCSSWithoutDark(
 export default function colourToCSS(
   colour: string | [string, string],
   property: string | string[],
-  variable: string,
+  variable?: string,
 ): CSSRuleObject {
   const properties = Array.isArray(property) ? property : [property];
   if (typeof colour === "string") return colourToCSSWithoutDark(colour, properties, variable);

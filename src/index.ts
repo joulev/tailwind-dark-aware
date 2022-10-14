@@ -1,17 +1,16 @@
 import plugin from "tailwindcss/plugin";
-import Color from "color";
 import colourToCSS from "./utils/colour-to-css";
 import invertColour from "./utils/invert-colour";
 import flattenPalette from "./utils/flatten-palette";
 import type { ColourObject, ColourInfo } from "$types";
 import getInvertInPalette from "./utils/get-invert-in-palette";
 
-export = plugin(({ matchUtilities, theme }) => {
+export = plugin(({ matchUtilities, theme, corePlugins }) => {
   matchUtilities(
     {
       "text-wd": (value: string | ColourInfo) => {
         const cssProp = "color";
-        const cssOpacityVar = "--tw-text-opacity";
+        const cssOpacityVar = corePlugins("textOpacity") ? "--tw-text-opacity" : undefined;
         if (typeof value === "string")
           return colourToCSS([value, invertColour(value)], cssProp, cssOpacityVar);
         const [palette, shade] = value;

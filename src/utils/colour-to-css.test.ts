@@ -31,3 +31,7 @@ it("Should work for multiple properties", () => {
     background: "rgb(0 0 0 / var(--tw))",
   });
 });
+
+it("Should also work if opacity core module is disabled", () => {
+  expect(colourToCSS("#000000", "color")).toEqual({ color: "#000000" });
+});
