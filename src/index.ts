@@ -13,13 +13,14 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
     cssSelector: string,
     cssProp: string | string[],
     themeName: string,
-    opacityPlugin: string,
-    opacityVar: string,
+    opacityPlugin?: string,
+    opacityVar?: string,
   ) {
     matchUtilities(
       {
         [`${clsName}-${suffix}`]: (value: string | ColourInfo) => {
-          const cssOpacityVar = corePlugins(opacityPlugin) ? opacityVar : undefined;
+          const cssOpacityVar =
+            opacityPlugin && corePlugins(opacityPlugin) ? opacityVar : undefined;
           if (typeof value === "string")
             return colourToCSS([value, invertColour(value)], cssSelector, cssProp, cssOpacityVar);
           const [palette, shade] = value;
@@ -89,14 +90,7 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
 
   generateUtility("text", "&", "color", "textColor", "textOpacity", "--tw-text-opacity");
 
-  generateUtility(
-    "decoration",
-    "&",
-    "text-decoration-color",
-    "textDecorationColor",
-    "textOpacity", // TODO
-    "--tw-text-opacity",
-  );
+  generateUtility("decoration", "&", "text-decoration-color", "textDecorationColor");
 
   generateUtility(
     "placeholder",
@@ -107,43 +101,15 @@ export = plugin(({ matchUtilities, theme, corePlugins }) => {
     "--tw-placeholder-opacity",
   );
 
-  generateUtility(
-    "caret",
-    "&",
-    "caret-color",
-    "caretColor",
-    "caretOpacity", // TODO
-    "--tw-caret-opacity",
-  );
+  generateUtility("caret", "&", "caret-color", "caretColor");
 
-  generateUtility(
-    "accent",
-    "&",
-    "accent-color",
-    "accentColor",
-    "accentOpacity", // TODO
-    "--tw-accent-opacity",
-  );
+  generateUtility("accent", "&", "accent-color", "accentColor");
 
   // boxShadowColor: TODO
 
-  generateUtility(
-    "outline",
-    "&",
-    "outline-color",
-    "outlineColor",
-    "outlineOpacity", // TODO
-    "--tw-outline-opacity",
-  );
+  generateUtility("outline", "&", "outline-color", "outlineColor");
 
   generateUtility("ring", "&", "--tw-ring-color", "ringColor", "ringOpacity", "--tw-ring-opacity");
 
-  generateUtility(
-    "ring-offset",
-    "&",
-    "--tw-ring-offset-color",
-    "ringOffsetColor",
-    "ringOffsetOpacity", // TODO
-    "--tw-ring-offset-opacity",
-  );
+  generateUtility("ring-offset", "&", "--tw-ring-offset-color", "ringOffsetColor");
 });
