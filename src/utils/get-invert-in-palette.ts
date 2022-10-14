@@ -8,7 +8,7 @@ export default function getInvertInPalette(palette: ColourObject, shade: string)
         key !== "50" &&
         key !== "DEFAULT" &&
         typeof value === "string" &&
-        !["inherit", "currentColor", "transparent"].includes(value),
+        !["inherit", "currentColor", "transparent", "auto"].includes(value),
     ) as [string, string][]
   )
     .map(([key, val]) => ({

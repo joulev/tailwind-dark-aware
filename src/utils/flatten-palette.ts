@@ -8,7 +8,7 @@ export default function flattenPalette(colours: ColourObject | undefined): Flatt
         flatten(val, curPalette.concat(key));
         continue;
       }
-      if (["inherit", "currentColor", "transparent"].includes(val)) continue;
+      if (["inherit", "currentColor", "transparent", "auto"].includes(val)) continue;
       if (key === "50") continue;
       entries.push([
         (key === "DEFAULT" ? curPalette : curPalette.concat(key)).join("-"),

@@ -46,16 +46,18 @@ it('Should work with "global" colours', () => {
   });
 });
 
-it("Should ignore instances of inherit, currentColor and transparent", () => {
+it("Should ignore instances of inherit, currentColor, transparent and auto", () => {
   const colours: ColourObject = {
     inherit: "inherit",
     currentColor: "currentColor",
     transparent: "transparent",
+    auto: "auto",
     red: {
       light: "0",
       inherit: "inherit",
       currentColor: "currentColor",
       transparent: "transparent",
+      auto: "auto",
     },
   };
   const flattened = flattenPalette(colours);
