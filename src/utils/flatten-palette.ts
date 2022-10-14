@@ -17,5 +17,5 @@ export default function flattenPalette(colours: ColourObject | undefined): Flatt
     }
   }
   flatten(colours ?? {}, []);
-  return Object.fromEntries(entries);
+  return Object.fromEntries(entries.filter(([key]) => key !== ""));
 }

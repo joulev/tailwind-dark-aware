@@ -92,3 +92,10 @@ it("Should handle `undefined`", () => {
   const flattened = flattenPalette(undefined);
   expect(flattened).toStrictEqual({});
 });
+
+it("Should exclude global DEFAULT colour", () => {
+  // if some idiot decides to use the name "DEFAULT" for a global colour...
+  const colours: ColourObject = { DEFAULT: "0" };
+  const flattened = flattenPalette(colours);
+  expect(flattened).toStrictEqual({});
+});
