@@ -5,8 +5,13 @@
     "lib": ["es2020"],
     "declaration": true,
     "strict": true,
+    "esModuleInterop": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "paths": {
+      "$types": ["./src/types"]
+    }
   },
-  "exclude": ["./node_modules", "./dist", "./demo"]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./node_modules"]
 }

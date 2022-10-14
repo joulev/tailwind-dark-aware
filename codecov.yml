@@ -1,0 +1,11 @@
+comment:
+  layout: "reach, diff, flags, files"
+coverage:
+  status:
+    project:
+      default:
+        threshold: 5%
+    patch:
+      default:
+        threshold: 5%
+        only_pulls: true

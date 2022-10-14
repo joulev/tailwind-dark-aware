@@ -1,7 +1,7 @@
-import type { ColourObject, FlattenedColourPalette } from "./types";
+import type { ColourObject, FlattenPalette } from "$types";
 
-export const flattenColourPalette: FlattenedColourPalette = (colours) => {
-  const entries: [string, ReturnType<FlattenedColourPalette>[string]][] = [];
+const flattenPalette: FlattenPalette = (colours) => {
+  const entries: [string, ReturnType<FlattenPalette>[string]][] = [];
   function flatten(colours: ColourObject, curPalette: string[]) {
     for (const [key, val] of Object.entries(colours)) {
       if (typeof val === "object") {
@@ -19,3 +19,5 @@ export const flattenColourPalette: FlattenedColourPalette = (colours) => {
   flatten(colours ?? {}, []);
   return Object.fromEntries(entries);
 };
+
+export default flattenPalette;

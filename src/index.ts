@@ -1,7 +1,7 @@
-import * as plugin from "tailwindcss/plugin";
-import * as Color from "color";
-import { flattenColourPalette } from "./utils";
-import type { ColourObject } from "./types";
+import plugin from "tailwindcss/plugin";
+import Color from "color";
+import flattenPalette from "./utils/flatten-palette";
+import type { ColourObject } from "$types";
 
 export = plugin(({ matchUtilities, theme }) => {
   matchUtilities(
@@ -53,6 +53,6 @@ export = plugin(({ matchUtilities, theme }) => {
         };
       },
     },
-    { values: flattenColourPalette(theme("textColor")), type: ["color"] },
+    { values: flattenPalette(theme("textColor")), type: ["color"] },
   );
 });

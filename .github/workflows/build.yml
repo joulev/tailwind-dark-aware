@@ -16,3 +16,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm main:build # for now
+      - run: pnpm test:ci
+      - uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
