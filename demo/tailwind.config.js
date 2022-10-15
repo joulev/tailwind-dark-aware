@@ -1,20 +1,18 @@
-const colors = require("tailwindcss/colors");
+const { join } = require("path");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: [require("path").join(__dirname, "pages/**/*.tsx")],
+  content: [join(__dirname, "pages/**/*.tsx"), join(__dirname, "components/**/*.tsx")],
+  darkMode: "class",
   theme: {
-    extend: {
-      colors: {
-        short: "black",
-        "my-own-color": {
-          DEFAULT: "#ff0000",
-          "very-nested": {
-            "in-more-level": colors.blue,
-          },
-          ...colors.green,
-        },
-      },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+    },
+    container: {
+      center: true,
+      padding: "1.5rem",
     },
   },
   plugins: [require("../dist/index.js")],
