@@ -38,7 +38,7 @@ Now you know how to use it: simply add `daw` (short for "dark aware") before the
 
 ```jsx
 // = bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100
-<body className="bg-daw-stone-100 text-daw-stone-900">Hello world</body>
+() => <body className="bg-daw-stone-100 text-daw-stone-900">Hello world</body>;
 ```
 
 A couple of things to note:
@@ -62,13 +62,13 @@ A couple of things to note:
   }
 
   // Component.jsx
-  <div className="text-daw-red" /> // = "text-red dark:text-red"
+  () => <div className="text-daw-red" /> // = text-red dark:text-red
   ```
 
 - If you provide a custom value (using the bracket notation), by default your colour is inverted with `(h, s, l) => (h, s, 100 - l)`. You can [choose to keep it intact instead](#invertcustomcolours).
 
   ```jsx
-  <div className="text-daw-[#123456]" /> // = "text-[#123456] dark:text-[#a9cbed]"
+  () => <div className="text-daw-[#123456]" />; // = text-[#123456] dark:text-[#a9cbed]
   ```
 
 ## Customising
@@ -98,7 +98,7 @@ This sets the suffix added to all colour utilities.
 
 ```jsx
 require("tailwind-dark-aware")({ suffix: "my-suffix" })
-<div className="text-my-suffix-red-300" /> // = text-red-300 dark:text-red-700
+() => <div className="text-my-suffix-red-300" /> // = text-red-300 dark:text-red-700
 ```
 
 ### `ignoredKeys`
@@ -115,7 +115,7 @@ With the default configuration (`["50"]`), this would mean `[100, 900]`, `[200, 
 ```jsx
 require("tailwind-dark-aware")({ ignoredKeys: ["400", "700"] })
 // 50, 100, 200, 300, 500, 600, 800, 900
-<div className="text-daw-red-200" /> // = text-red-200 dark:text-red-600
+() => <div className="text-daw-red-200" /> // = text-red-200 dark:text-red-600
 ```
 
 ### `invertCustomColours`
@@ -127,12 +127,12 @@ Whether to invert custom colours (provided by the bracket notation) or not. If s
 
 ```jsx
 require("tailwind-dark-aware")({ invertCustomColours: true })
-<div className="text-daw-[#123456]" /> // = text-[#123456] dark:text-[#a9cbed]
+() => <div className="text-daw-[#123456]" /> // = text-[#123456] dark:text-[#a9cbed]
 ```
 
 ```jsx
 require("tailwind-dark-aware")({ invertCustomColours: false })
-<div className="text-daw-[#123456]" /> // = text-[#123456] dark:text-[#123456]
+() => <div className="text-daw-[#123456]" /> // = text-[#123456] dark:text-[#123456]
 ```
 
 ### `invertDefaultColours`
@@ -159,12 +159,12 @@ Whether to invert colour defined with `DEFAULT` key in `tailwind.config.js`. If 
 
 ```jsx
 require("tailwind-dark-aware")({ invertDefaultColours: true })
-<div className="text-daw-primary" /> // = text-primary dark:text-[#a9cbed]
+() => <div className="text-daw-primary" /> // = text-primary dark:text-[#a9cbed]
 ```
 
 ```jsx
 require("tailwind-dark-aware")({ invertDefaultColours: false })
-<div className="text-daw-primary" /> // = text-primary dark:text-primary
+() => <div className="text-daw-primary" /> // = text-primary dark:text-primary
 ```
 
 ### `nonInvertBehaviour`
@@ -178,12 +178,12 @@ Specify what happens if a colour, either a `DEFAULT` colour or a custom colour, 
 
 ```jsx
 require("tailwind-dark-aware")({ nonInvertBehaviour: "same-dark" })
-<div className="text-daw-primary" /> // = text-primary dark:text-primary
+() => <div className="text-daw-primary" /> // = text-primary dark:text-primary
 ```
 
 `no-dark` does not declare for dark mode.
 
 ```jsx
 require("tailwind-dark-aware")({ nonInvertBehaviour: "no-dark" })
-<div className="text-daw-primary" /> // = text-primary
+() => <div className="text-daw-primary" /> // = text-primary
 ```
