@@ -17,13 +17,15 @@ it("Should work with dark mode colour", () => {
 });
 
 it("Should work with single colour", () => {
-  expect(colourToCSS(options, "#000000", f)).toEqual({ color: "#000000" });
-});
-
-it("Should work with `nonInvertBehaviour` set to `same-dark`", () => {
-  expect(colourToCSS({ ...options, nonInvertBehaviour: "same-dark" }, "#000000", f)).toEqual({
+  expect(colourToCSS(options, "#000000", f)).toEqual({
     color: "#000000",
     "@media (prefers-color-scheme: dark)": { color: "#000000" },
+  });
+});
+
+it("Should work with `nonInvertBehaviour` set to `no-dark`", () => {
+  expect(colourToCSS({ ...options, nonInvertBehaviour: "no-dark" }, "#000000", f)).toEqual({
+    color: "#000000",
   });
 });
 
