@@ -1,6 +1,6 @@
 {
   "name": "tailwind-dark-aware",
-  "version": "unreleased",
+  "version": "0.1.0",
   "description": "Tailwind CSS plugin to generate shorthands for light mode and dark mode classes.",
   "author": "Vu Van Dung",
   "license": "MIT",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "main:build": "tsc -p tsconfig.build.json",
-    "main:watch": "tsc -w",
+    "main:watch": "tsc -w -p tsconfig.build.json",
     "demo:dev": "next dev ./demo",
     "demo:build": "next build ./demo",
     "demo:start": "next start ./demo",
