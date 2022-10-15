@@ -3,6 +3,7 @@ import colourToCSS from "./utils/colour-to-css";
 import invertColour from "./utils/invert-colour";
 import flattenPalette from "./utils/flatten-palette";
 import getInvertInPalette from "./utils/get-invert-in-palette";
+import { withAlphaVariable, withAlphaValue } from "./utils/with-alpha";
 import defaultOptions from "./default-options";
 import type {
   ColourObject,
@@ -23,29 +24,15 @@ export = plugin.withOptions<Partial<Options>>(
 
       const options: ExtendedOptions = { ...defaultOptions, ...userOptions, darkModeSelector };
 
-      function generateUtility({
-        className,
-        cssSelector = "&",
-        cssProp,
-        themeName,
-        opacityPlugin,
-        opacityVar,
-        customCSS,
-      }: GenerateUtilsProps) {
+      function generateUtility({ className, themeName, func }: GenerateUtilsProps) {
         matchUtilities(
           {
             [`${className}-${options.suffix}`]: (value: string | ColourInfo) => {
-              const cssOpacityVar =
-                opacityPlugin && corePlugins(opacityPlugin) ? opacityVar : undefined;
-
               if (typeof value === "string")
                 return colourToCSS(
                   options,
                   options.invertCustomColours ? [value, invertColour(value)] : value,
-                  cssSelector,
-                  cssProp,
-                  cssOpacityVar,
-                  customCSS,
+                  func,
                 );
 
               const [palette, shade] = value;
@@ -56,135 +43,217 @@ export = plugin.withOptions<Partial<Options>>(
                 return colourToCSS(
                   options,
                   options.invertDefaultColours ? [current, invertColour(current)] : current,
-                  cssSelector,
-                  cssProp,
-                  cssOpacityVar,
-                  customCSS,
+                  func,
                 );
 
               const invert = getInvertInPalette(options, theme<ColourObject>(prefix), shade);
-              return colourToCSS(
-                options,
-                [current, invert],
-                cssSelector,
-                cssProp,
-                cssOpacityVar,
-                customCSS,
-              );
+              return colourToCSS(options, [current, invert], func);
             },
           },
-          { values: flattenPalette(options, theme(themeName)), type: ["color"] },
+          { values: flattenPalette(options, theme(themeName)), type: ["color", "any"] },
         );
       }
 
       generateUtility({
         className: "divide",
-        cssSelector: "& > :not([hidden]) ~ :not([hidden])",
-        cssProp: "border-color",
         themeName: "divideColor",
-        opacityPlugin: "divideOpacity",
-        opacityVar: "--tw-divide-opacity",
+        func(value) {
+          const selector = "& > :not([hidden]) ~ :not([hidden])";
+          if (!corePlugins("divideOpacity")) return { [selector]: { "border-color": value } };
+          return {
+            [selector]: withAlphaVariable({
+              colour: value,
+              property: "border-color",
+              variable: "--tw-divide-opacity",
+            }),
+          };
+        },
       });
 
       generateUtility({
         className: "border",
-        cssProp: "border-color",
         themeName: "borderColor",
-        opacityPlugin: "borderOpacity",
-        opacityVar: "--tw-border-opacity",
+        func(value) {
+          if (!corePlugins("borderOpacity")) return { "border-color": value };
+          return withAlphaVariable({
+            colour: value,
+            property: "border-color",
+            variable: "--tw-border-opacity",
+          });
+        },
       });
+
       generateUtility({
         className: "border-x",
-        cssProp: ["border-left-color", "border-right-color"],
         themeName: "borderColor",
-        opacityPlugin: "borderOpacity",
-        opacityVar: "--tw-border-opacity",
+        func(value) {
+          if (!corePlugins("borderOpacity"))
+            return { "border-left-color": value, "border-right-color": value };
+          return withAlphaVariable({
+            colour: value,
+            property: ["border-left-color", "border-right-color"],
+            variable: "--tw-border-opacity",
+          });
+        },
       });
+
       generateUtility({
         className: "border-y",
-        cssProp: ["border-top-color", "border-bottom-color"],
         themeName: "borderColor",
-        opacityPlugin: "borderOpacity",
-        opacityVar: "--tw-border-opacity",
+        func(value) {
+          if (!corePlugins("borderOpacity"))
+            return { "border-top-color": value, "border-bottom-color": value };
+          return withAlphaVariable({
+            colour: value,
+            property: ["border-top-color", "border-bottom-color"],
+            variable: "--tw-border-opacity",
+          });
+        },
       });
+
       for (const side of ["top", "right", "bottom", "left"]) {
         generateUtility({
           className: `border-${side.substring(0, 1)}`,
-          cssProp: `border-${side}-color`,
           themeName: "borderColor",
-          opacityPlugin: "borderOpacity",
-          opacityVar: "--tw-border-opacity",
+          func(value) {
+            if (!corePlugins("borderOpacity")) return { [`border-${side}-color`]: value };
+            return withAlphaVariable({
+              colour: value,
+              property: `border-${side}-color`,
+              variable: "--tw-border-opacity",
+            });
+          },
         });
       }
 
       generateUtility({
         className: "bg",
-        cssProp: "background-color",
         themeName: "backgroundColor",
-        opacityPlugin: "backgroundOpacity",
-        opacityVar: "--tw-bg-opacity",
+        func(value) {
+          if (!corePlugins("backgroundOpacity")) return { "background-color": value };
+          return withAlphaVariable({
+            colour: value,
+            property: "background-color",
+            variable: "--tw-bg-opacity",
+          });
+        },
+      });
+
+      generateUtility({
+        className: "from",
+        themeName: "gradientColorStops",
+        func: (value) => ({
+          "--tw-gradient-from": value,
+          "--tw-gradient-to": withAlphaValue(value, 0, "rgb(255 255 255 / 0)"),
+          "--tw-gradient-stops": `var(--tw-gradient-from), var(--tw-gradient-to)`,
+        }),
+      });
+
+      generateUtility({
+        className: "via",
+        themeName: "gradientColorStops",
+        func: (value) => ({
+          "--tw-gradient-to": withAlphaValue(value, 0, "rgb(255 255 255 / 0)"),
+          "--tw-gradient-stops": `var(--tw-gradient-from), ${value}, var(--tw-gradient-to)`,
+        }),
+      });
+
+      generateUtility({
+        className: "to",
+        themeName: "gradientColorStops",
+        func: (value) => ({ "--tw-gradient-to": value }),
+      });
+
+      generateUtility({
+        className: "fill",
+        themeName: "fill",
+        func: (value) => ({ fill: value }),
+      });
+
+      generateUtility({
+        className: "stroke",
+        themeName: "stroke",
+        func: (value) => ({ stroke: value }),
       });
 
       generateUtility({
         className: "text",
-        cssProp: "color",
         themeName: "textColor",
-        opacityPlugin: "textOpacity",
-        opacityVar: "--tw-text-opacity",
+        func(value) {
+          if (!corePlugins("textOpacity")) return { color: value };
+          return withAlphaVariable({
+            colour: value,
+            property: "color",
+            variable: "--tw-text-opacity",
+          });
+        },
       });
 
       generateUtility({
         className: "decoration",
-        cssProp: "text-decoration-color",
         themeName: "textDecorationColor",
+        func: (value) => ({ "text-decoration-color": value }),
       });
 
       generateUtility({
         className: "placeholder",
-        cssSelector: "&::placeholder",
-        cssProp: "color",
         themeName: "placeholderColor",
-        opacityPlugin: "placeholderOpacity",
-        opacityVar: "--tw-placeholder-opacity",
+        func(value) {
+          if (!corePlugins("placeholderOpacity")) return { "&::placeholder": { color: value } };
+          return {
+            "&::placeholder": withAlphaVariable({
+              colour: value,
+              property: "color",
+              variable: "--tw-placeholder-opacity",
+            }),
+          };
+        },
       });
 
       generateUtility({
         className: "caret",
-        cssProp: "caret-color",
         themeName: "caretColor",
+        func: (value) => ({ "caret-color": value }),
       });
 
       generateUtility({
         className: "accent",
-        cssProp: "accent-color",
         themeName: "accentColor",
+        func: (value) => ({ "accent-color": value }),
       });
 
       generateUtility({
         className: "shadow",
-        cssProp: "--tw-shadow-color",
         themeName: "boxShadowColor",
-        customCSS: { "--tw-shadow": "var(--tw-shadow-colored)" },
+        func: (value) => ({
+          "--tw-shadow-color": value,
+          "--tw-shadow": "var(--tw-shadow-colored)",
+        }),
       });
 
       generateUtility({
         className: "outline",
-        cssProp: "outline-color",
         themeName: "outlineColor",
+        func: (value) => ({ "outline-color": value }),
       });
 
       generateUtility({
         className: "ring",
-        cssProp: "--tw-ring-color",
         themeName: "ringColor",
-        opacityPlugin: "ringOpacity",
-        opacityVar: "--tw-ring-opacity",
+        func(value) {
+          if (!corePlugins("ringOpacity")) return { "--tw-ring-color": value };
+          return withAlphaVariable({
+            colour: value,
+            property: "--tw-ring-color",
+            variable: "--tw-ring-opacity",
+          });
+        },
       });
 
       generateUtility({
         className: "ring-offset",
-        cssProp: "--tw-ring-offset-color",
         themeName: "ringOffsetColor",
+        func: (value) => ({ "--tw-ring-offset-color": value }),
       });
     },
 );
