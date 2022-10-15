@@ -1,5 +1,11 @@
 import colourToCSS from "./colour-to-css";
-import options from "../default-options";
+import defaultOptions from "../default-options";
+import type { ExtendedOptions } from "$types";
+
+const options: ExtendedOptions = {
+  ...defaultOptions,
+  darkModeSelector: "@media (prefers-color-scheme: dark)",
+};
 
 it("Should work with dark mode colour", () => {
   expect(colourToCSS(options, ["#000000", "#ffffff"], "&", "color", "--tw")).toEqual({
@@ -72,4 +78,27 @@ it("Should work with custom CSS added", () => {
       "&": { color: "#000000", "font-size": "1rem" },
     },
   );
+});
+
+it("Should work with custom CSS dark mode selector", () => {
+  expect(
+    colourToCSS(
+      { ...options, darkModeSelector: ".dark &" },
+      ["#000000", "#ffffff"],
+      "&",
+      "color",
+      "--tw",
+    ),
+  ).toEqual({
+    "&": {
+      "--tw": "1",
+      color: "rgb(0 0 0 / var(--tw))",
+    },
+    ".dark &": {
+      "&": {
+        "--tw": "1",
+        color: "rgb(255 255 255 / var(--tw))",
+      },
+    },
+  });
 });

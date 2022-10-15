@@ -4,12 +4,24 @@ import invertColour from "./utils/invert-colour";
 import flattenPalette from "./utils/flatten-palette";
 import getInvertInPalette from "./utils/get-invert-in-palette";
 import defaultOptions from "./default-options";
-import type { ColourObject, ColourInfo, GenerateUtilsProps, Options } from "$types";
+import type {
+  ColourObject,
+  ColourInfo,
+  GenerateUtilsProps,
+  Options,
+  ExtendedOptions,
+} from "$types";
 
 export = plugin.withOptions<Partial<Options>>(
   (userOptions = {}) =>
-    ({ matchUtilities, theme, corePlugins }) => {
-      const options: Options = { ...defaultOptions, ...userOptions };
+    ({ matchUtilities, theme, config, corePlugins }) => {
+      const darkModeConfig = config("darkMode", "media") as "media" | "class" | ["class", string];
+      let darkModeSelector: string;
+      if (darkModeConfig === "media") darkModeSelector = "@media (prefers-color-scheme: dark)";
+      else if (darkModeConfig === "class") darkModeSelector = ".dark &";
+      else darkModeSelector = `${darkModeConfig[1]} &`;
+
+      const options: ExtendedOptions = { ...defaultOptions, ...userOptions, darkModeSelector };
 
       function generateUtility({
         className,

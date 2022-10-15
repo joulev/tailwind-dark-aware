@@ -29,3 +29,7 @@ export type Options = {
   invertCustomColours: boolean;
   nonInvertBehaviour: "no-dark" | "same-dark";
 };
+
+export type ExtendedOptions = Options & {
+  darkModeSelector: string;
+};
