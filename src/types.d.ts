@@ -27,4 +27,5 @@ export type Options = {
   ignoredKeys: string[];
   invertDefaultColours: boolean;
   invertCustomColours: boolean;
+  nonInvertBehaviour: "no-dark" | "same-dark";
 };

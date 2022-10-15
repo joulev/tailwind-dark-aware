@@ -28,6 +28,7 @@ export = plugin.withOptions<Partial<Options>>(
 
               if (typeof value === "string")
                 return colourToCSS(
+                  options,
                   options.invertCustomColours ? [value, invertColour(value)] : value,
                   cssSelector,
                   cssProp,
@@ -41,6 +42,7 @@ export = plugin.withOptions<Partial<Options>>(
 
               if (shade === "DEFAULT")
                 return colourToCSS(
+                  options,
                   options.invertDefaultColours ? [current, invertColour(current)] : current,
                   cssSelector,
                   cssProp,
@@ -49,7 +51,14 @@ export = plugin.withOptions<Partial<Options>>(
                 );
 
               const invert = getInvertInPalette(options, theme<ColourObject>(prefix), shade);
-              return colourToCSS([current, invert], cssSelector, cssProp, cssOpacityVar, customCSS);
+              return colourToCSS(
+                options,
+                [current, invert],
+                cssSelector,
+                cssProp,
+                cssOpacityVar,
+                customCSS,
+              );
             },
           },
           { values: flattenPalette(options, theme(themeName)), type: ["color"] },

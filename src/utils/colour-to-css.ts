@@ -1,5 +1,5 @@
-import type { CSSRuleObject } from "$types";
 import Color from "color";
+import type { CSSRuleObject, Options } from "$types";
 
 // https://github.com/tailwindlabs/tailwindcss/blob/a8a2e2a7191fbd4bee044523aecbade5823a8664/src/util/withAlphaVariable.js#L17
 function colourToCSSWithoutDark(
@@ -20,6 +20,7 @@ function colourToCSSWithoutDark(
 }
 
 export default function colourToCSS(
+  options: Options,
   colour: string | [string, string],
   selector: string,
   property: string | string[],
@@ -27,13 +28,20 @@ export default function colourToCSS(
   customCSS?: CSSRuleObject,
 ): CSSRuleObject {
   const properties = Array.isArray(property) ? property : [property];
-  if (typeof colour === "string")
-    return {
+  if (typeof colour === "string") {
+    const css = {
       [selector]: {
         ...colourToCSSWithoutDark(colour, properties, variable),
         ...customCSS,
       },
     };
+    if (options.nonInvertBehaviour === "no-dark") return css;
+    return {
+      ...css,
+      "@media (prefers-color-scheme: dark)": css,
+    };
+  }
+
   return {
     [selector]: {
       ...colourToCSSWithoutDark(colour[0], properties, variable),
