@@ -6,6 +6,11 @@ Tailwind CSS plugin to generate shorthands for light mode and dark mode colour c
 
 ---
 
+## Demo app
+
+**Deployment:** https://tailwind-dark-aware.vercel.app  
+**Source:** https://github.com/joulev/tailwind-dark-aware/tree/main/demo
+
 ## Installation
 
 ```sh
