@@ -21,3 +21,10 @@ export type GenerateUtilsProps = {
   opacityVar?: string;
   customCSS?: CSSRuleObject;
 };
+
+export type Options = {
+  suffix: string;
+  ignoredKeys: string[];
+  invertDefaultColours: boolean;
+  invertCustomColours: boolean;
+};

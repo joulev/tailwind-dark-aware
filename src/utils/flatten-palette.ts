@@ -1,6 +1,9 @@
-import type { ColourObject, FlattenedObject } from "$types";
+import type { ColourObject, FlattenedObject, Options } from "$types";
 
-export default function flattenPalette(colours: ColourObject | undefined): FlattenedObject {
+export default function flattenPalette(
+  options: Options,
+  colours: ColourObject | undefined,
+): FlattenedObject {
   const entries: [string, FlattenedObject[string]][] = [];
   function flatten(colours: ColourObject, curPalette: string[]) {
     for (const [key, val] of Object.entries(colours)) {
@@ -9,7 +12,7 @@ export default function flattenPalette(colours: ColourObject | undefined): Flatt
         continue;
       }
       if (["inherit", "currentColor", "transparent", "auto"].includes(val)) continue;
-      if (key === "50") continue;
+      if (options.ignoredKeys.includes(key)) continue;
       entries.push([
         (key === "DEFAULT" ? curPalette : curPalette.concat(key)).join("-"),
         [curPalette.join("."), key],

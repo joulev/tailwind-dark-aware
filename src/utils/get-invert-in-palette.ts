@@ -1,11 +1,11 @@
 import Color from "color";
-import type { ColourObject } from "$types";
+import type { ColourObject, Options } from "$types";
 
-export default function getInvertInPalette(palette: ColourObject, shade: string) {
+export default function getInvertInPalette(options: Options, palette: ColourObject, shade: string) {
   const paletteColours = (
     Object.entries(palette).filter(
       ([key, value]) =>
-        key !== "50" &&
+        !options.ignoredKeys.includes(key) &&
         key !== "DEFAULT" &&
         typeof value === "string" &&
         !["inherit", "currentColor", "transparent", "auto"].includes(value),
