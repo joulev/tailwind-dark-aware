@@ -1,3 +1,4 @@
+import { ignoredColours } from "./constants";
 import type { ColourObject, FlattenedObject, Options } from "$types";
 
 export default function flattenPalette(
@@ -11,7 +12,7 @@ export default function flattenPalette(
         flatten(val, curPalette.concat(key));
         continue;
       }
-      if (["inherit", "currentColor", "transparent", "auto"].includes(val)) continue;
+      if (ignoredColours.includes(val)) continue;
       if (options.ignoredKeys.includes(key)) continue;
       entries.push([
         (key === "DEFAULT" ? curPalette : curPalette.concat(key)).join("-"),

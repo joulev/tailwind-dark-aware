@@ -1,4 +1,5 @@
 import Color from "color";
+import { ignoredColours } from "./constants";
 import type { ColourObject, Options } from "$types";
 
 export default function getInvertInPalette(options: Options, palette: ColourObject, shade: string) {
@@ -8,7 +9,7 @@ export default function getInvertInPalette(options: Options, palette: ColourObje
         !options.ignoredKeys.includes(key) &&
         key !== "DEFAULT" &&
         typeof value === "string" &&
-        !["inherit", "currentColor", "transparent", "auto"].includes(value),
+        !ignoredColours.includes(value),
     ) as [string, string][]
   )
     .map(([key, val]) => ({
