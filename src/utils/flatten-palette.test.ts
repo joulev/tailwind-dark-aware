@@ -65,12 +65,6 @@ it("Should ignore instances of inherit, currentColor, transparent and auto", () 
   expect(flattened).toStrictEqual({ "red-light": ["red", "light"] });
 });
 
-it("Should ignore colours of key `50`", () => {
-  const colours: ColourObject = { red: { light: "0", 50: "1" } };
-  const flattened = flattenPalette(options, colours);
-  expect(flattened).toStrictEqual({ "red-light": ["red", "light"] });
-});
-
 it("Should ignore colours of ignored keys, if set", () => {
   const colours: ColourObject = { red: { light: "0", 50: "1" } };
   const flattened = flattenPalette({ ...options, ignoredKeys: ["light"] }, colours);

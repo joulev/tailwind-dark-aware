@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   }, [isDark]);
   return (
     <div className="pb-24">
-      <div className="container mx-auto sticky top-0 bg-daw-stone-100">
+      <div className="container mx-auto sticky top-0 bg-daw-stone-50">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 py-12 mt-0 mb-24 border-b border-daw-stone-300">
           <h1 className="text-center sm:text-left">tailwind-dark-aware</h1>
           <div className="flex flex-row gap-3">

@@ -12,7 +12,7 @@ it("Should return correct colour for default `red` scale", () => {
 
 it("Should return correct colour with some keys being ignored", () => {
   const customOptions = { ...options, ignoredKeys: ["300", "800"] };
-  const arr = [50, 100, 200, 400, 500, 600, 700, 900];
+  const arr = [50, 100, 200, 400, 500, 600, 700, 900, 950];
   for (let i = 0; i < arr.length; i++)
     expect(getInvertInPalette(customOptions, c.red, arr[i].toString())).toBe(
       c.red[arr[arr.length - 1 - i].toString() as keyof typeof c.red],

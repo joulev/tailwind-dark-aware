@@ -48,8 +48,6 @@ Now you know how to use it: simply add `daw` (short for "dark aware") before the
 
 A couple of things to note:
 
-- By default, Tailwind colours of shade 50 are ignored (so you can't do `bg-daw-stone-50`). The reason being that Tailwind doesn't provide shade 950. You can [override this behaviour](#ignoredkeys).
-
 - If you provide colour labeled with `DEFAULT`, by default your colour is kept intact (i.e. same colour in dark mode as in light mode). You can [change this behaviour](#invertdefaultcolours).
 
   ```jsx
@@ -109,19 +107,21 @@ require("tailwind-dark-aware")({ suffix: "my-suffix" })
 ### `ignoredKeys`
 
 **TypeScript type:** `string[]`  
-**Default:** `["50"]`
+**Default:** `[]`
 
 The "shades" to be ignored.
 
 To find the dark mode variant of a colour, `tailwind-dark-aware` sorts the palette by luminosity, then get the colour placed opposite to the colour in question.
 
-With the default configuration (`["50"]`), this would mean `[100, 900]`, `[200, 800]`, `[300, 700]` and so on. However, if you change it to (say) `[]`, the pairing would become `[50, 900]`, `[100, 800]`, `[200, 700]`, etc. Therefore, you would probably not want to use this option.
+With the default configuration (`[]`), this would mean `[50, 950]`, `[100, 900]`, `[200, 800]`, `[300, 700]` and so on. However, if you change it to (say) `["50"]`, the pairing would become `[100, 950]`, `[200, 900]`, `[300, 800]`, etc. Therefore, you would probably not want to use this option.
 
 ```jsx
 require("tailwind-dark-aware")({ ignoredKeys: ["400", "700"] })
-// 50, 100, 200, 300, 500, 600, 800, 900
-() => <div className="text-daw-red-200" /> // = text-red-200 dark:text-red-600
+// 50, 100, 200, 300, 500, 600, 800, 900, 950
+() => <div className="text-daw-red-300" /> // = text-red-300 dark:text-red-600
 ```
+
+> **Note:** The colour schemes of Tailwind is updated with the 950 shade in Tailwind v3.3.0. If you use an earlier Tailwind version, while the package would still work, since shade 950 is not available you should configure `ignoredKeys` to be `["50"]`, otherwise the pairing would be `[50, 900]`, `[100, 800]`, etc. which is likely not what you want.
 
 ### `invertCustomColours`
 

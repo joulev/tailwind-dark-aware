@@ -18,6 +18,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "amber",
     "400",
   ],
+  "amber-50": [
+    "amber",
+    "50",
+  ],
   "amber-500": [
     "amber",
     "500",
@@ -37,6 +41,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "amber-900": [
     "amber",
     "900",
+  ],
+  "amber-950": [
+    "amber",
+    "950",
   ],
   "black": [
     "",
@@ -58,6 +66,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "blue",
     "400",
   ],
+  "blue-50": [
+    "blue",
+    "50",
+  ],
   "blue-500": [
     "blue",
     "500",
@@ -78,6 +90,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "blue",
     "900",
   ],
+  "blue-950": [
+    "blue",
+    "950",
+  ],
   "blueGray-100": [
     "blueGray",
     "100",
@@ -93,6 +109,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "blueGray-400": [
     "blueGray",
     "400",
+  ],
+  "blueGray-50": [
+    "blueGray",
+    "50",
   ],
   "blueGray-500": [
     "blueGray",
@@ -114,6 +134,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "blueGray",
     "900",
   ],
+  "blueGray-950": [
+    "blueGray",
+    "950",
+  ],
   "coolGray-100": [
     "coolGray",
     "100",
@@ -129,6 +153,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "coolGray-400": [
     "coolGray",
     "400",
+  ],
+  "coolGray-50": [
+    "coolGray",
+    "50",
   ],
   "coolGray-500": [
     "coolGray",
@@ -150,6 +178,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "coolGray",
     "900",
   ],
+  "coolGray-950": [
+    "coolGray",
+    "950",
+  ],
   "cyan-100": [
     "cyan",
     "100",
@@ -165,6 +197,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "cyan-400": [
     "cyan",
     "400",
+  ],
+  "cyan-50": [
+    "cyan",
+    "50",
   ],
   "cyan-500": [
     "cyan",
@@ -186,6 +222,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "cyan",
     "900",
   ],
+  "cyan-950": [
+    "cyan",
+    "950",
+  ],
   "emerald-100": [
     "emerald",
     "100",
@@ -201,6 +241,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "emerald-400": [
     "emerald",
     "400",
+  ],
+  "emerald-50": [
+    "emerald",
+    "50",
   ],
   "emerald-500": [
     "emerald",
@@ -222,6 +266,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "emerald",
     "900",
   ],
+  "emerald-950": [
+    "emerald",
+    "950",
+  ],
   "fuchsia-100": [
     "fuchsia",
     "100",
@@ -237,6 +285,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "fuchsia-400": [
     "fuchsia",
     "400",
+  ],
+  "fuchsia-50": [
+    "fuchsia",
+    "50",
   ],
   "fuchsia-500": [
     "fuchsia",
@@ -258,6 +310,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "fuchsia",
     "900",
   ],
+  "fuchsia-950": [
+    "fuchsia",
+    "950",
+  ],
   "gray-100": [
     "gray",
     "100",
@@ -273,6 +329,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "gray-400": [
     "gray",
     "400",
+  ],
+  "gray-50": [
+    "gray",
+    "50",
   ],
   "gray-500": [
     "gray",
@@ -294,6 +354,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "gray",
     "900",
   ],
+  "gray-950": [
+    "gray",
+    "950",
+  ],
   "green-100": [
     "green",
     "100",
@@ -309,6 +373,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "green-400": [
     "green",
     "400",
+  ],
+  "green-50": [
+    "green",
+    "50",
   ],
   "green-500": [
     "green",
@@ -330,6 +398,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "green",
     "900",
   ],
+  "green-950": [
+    "green",
+    "950",
+  ],
   "indigo-100": [
     "indigo",
     "100",
@@ -345,6 +417,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "indigo-400": [
     "indigo",
     "400",
+  ],
+  "indigo-50": [
+    "indigo",
+    "50",
   ],
   "indigo-500": [
     "indigo",
@@ -366,6 +442,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "indigo",
     "900",
   ],
+  "indigo-950": [
+    "indigo",
+    "950",
+  ],
   "lightBlue-100": [
     "lightBlue",
     "100",
@@ -381,6 +461,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "lightBlue-400": [
     "lightBlue",
     "400",
+  ],
+  "lightBlue-50": [
+    "lightBlue",
+    "50",
   ],
   "lightBlue-500": [
     "lightBlue",
@@ -402,6 +486,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "lightBlue",
     "900",
   ],
+  "lightBlue-950": [
+    "lightBlue",
+    "950",
+  ],
   "lime-100": [
     "lime",
     "100",
@@ -417,6 +505,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "lime-400": [
     "lime",
     "400",
+  ],
+  "lime-50": [
+    "lime",
+    "50",
   ],
   "lime-500": [
     "lime",
@@ -438,6 +530,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "lime",
     "900",
   ],
+  "lime-950": [
+    "lime",
+    "950",
+  ],
   "neutral-100": [
     "neutral",
     "100",
@@ -453,6 +549,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "neutral-400": [
     "neutral",
     "400",
+  ],
+  "neutral-50": [
+    "neutral",
+    "50",
   ],
   "neutral-500": [
     "neutral",
@@ -474,6 +574,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "neutral",
     "900",
   ],
+  "neutral-950": [
+    "neutral",
+    "950",
+  ],
   "orange-100": [
     "orange",
     "100",
@@ -489,6 +593,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "orange-400": [
     "orange",
     "400",
+  ],
+  "orange-50": [
+    "orange",
+    "50",
   ],
   "orange-500": [
     "orange",
@@ -510,6 +618,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "orange",
     "900",
   ],
+  "orange-950": [
+    "orange",
+    "950",
+  ],
   "pink-100": [
     "pink",
     "100",
@@ -525,6 +637,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "pink-400": [
     "pink",
     "400",
+  ],
+  "pink-50": [
+    "pink",
+    "50",
   ],
   "pink-500": [
     "pink",
@@ -546,6 +662,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "pink",
     "900",
   ],
+  "pink-950": [
+    "pink",
+    "950",
+  ],
   "purple-100": [
     "purple",
     "100",
@@ -561,6 +681,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "purple-400": [
     "purple",
     "400",
+  ],
+  "purple-50": [
+    "purple",
+    "50",
   ],
   "purple-500": [
     "purple",
@@ -582,6 +706,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "purple",
     "900",
   ],
+  "purple-950": [
+    "purple",
+    "950",
+  ],
   "red-100": [
     "red",
     "100",
@@ -597,6 +725,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "red-400": [
     "red",
     "400",
+  ],
+  "red-50": [
+    "red",
+    "50",
   ],
   "red-500": [
     "red",
@@ -618,6 +750,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "red",
     "900",
   ],
+  "red-950": [
+    "red",
+    "950",
+  ],
   "rose-100": [
     "rose",
     "100",
@@ -633,6 +769,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "rose-400": [
     "rose",
     "400",
+  ],
+  "rose-50": [
+    "rose",
+    "50",
   ],
   "rose-500": [
     "rose",
@@ -654,6 +794,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "rose",
     "900",
   ],
+  "rose-950": [
+    "rose",
+    "950",
+  ],
   "sky-100": [
     "sky",
     "100",
@@ -669,6 +813,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "sky-400": [
     "sky",
     "400",
+  ],
+  "sky-50": [
+    "sky",
+    "50",
   ],
   "sky-500": [
     "sky",
@@ -690,6 +838,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "sky",
     "900",
   ],
+  "sky-950": [
+    "sky",
+    "950",
+  ],
   "slate-100": [
     "slate",
     "100",
@@ -705,6 +857,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "slate-400": [
     "slate",
     "400",
+  ],
+  "slate-50": [
+    "slate",
+    "50",
   ],
   "slate-500": [
     "slate",
@@ -726,6 +882,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "slate",
     "900",
   ],
+  "slate-950": [
+    "slate",
+    "950",
+  ],
   "stone-100": [
     "stone",
     "100",
@@ -741,6 +901,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "stone-400": [
     "stone",
     "400",
+  ],
+  "stone-50": [
+    "stone",
+    "50",
   ],
   "stone-500": [
     "stone",
@@ -762,6 +926,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "stone",
     "900",
   ],
+  "stone-950": [
+    "stone",
+    "950",
+  ],
   "teal-100": [
     "teal",
     "100",
@@ -777,6 +945,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "teal-400": [
     "teal",
     "400",
+  ],
+  "teal-50": [
+    "teal",
+    "50",
   ],
   "teal-500": [
     "teal",
@@ -798,6 +970,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "teal",
     "900",
   ],
+  "teal-950": [
+    "teal",
+    "950",
+  ],
   "trueGray-100": [
     "trueGray",
     "100",
@@ -813,6 +989,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "trueGray-400": [
     "trueGray",
     "400",
+  ],
+  "trueGray-50": [
+    "trueGray",
+    "50",
   ],
   "trueGray-500": [
     "trueGray",
@@ -834,6 +1014,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "trueGray",
     "900",
   ],
+  "trueGray-950": [
+    "trueGray",
+    "950",
+  ],
   "violet-100": [
     "violet",
     "100",
@@ -849,6 +1033,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "violet-400": [
     "violet",
     "400",
+  ],
+  "violet-50": [
+    "violet",
+    "50",
   ],
   "violet-500": [
     "violet",
@@ -870,6 +1058,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "violet",
     "900",
   ],
+  "violet-950": [
+    "violet",
+    "950",
+  ],
   "warmGray-100": [
     "warmGray",
     "100",
@@ -885,6 +1077,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "warmGray-400": [
     "warmGray",
     "400",
+  ],
+  "warmGray-50": [
+    "warmGray",
+    "50",
   ],
   "warmGray-500": [
     "warmGray",
@@ -906,6 +1102,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "warmGray",
     "900",
   ],
+  "warmGray-950": [
+    "warmGray",
+    "950",
+  ],
   "white": [
     "",
     "white",
@@ -925,6 +1125,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "yellow-400": [
     "yellow",
     "400",
+  ],
+  "yellow-50": [
+    "yellow",
+    "50",
   ],
   "yellow-500": [
     "yellow",
@@ -946,6 +1150,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
     "yellow",
     "900",
   ],
+  "yellow-950": [
+    "yellow",
+    "950",
+  ],
   "zinc-100": [
     "zinc",
     "100",
@@ -961,6 +1169,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "zinc-400": [
     "zinc",
     "400",
+  ],
+  "zinc-50": [
+    "zinc",
+    "50",
   ],
   "zinc-500": [
     "zinc",
@@ -981,6 +1193,10 @@ exports[`Should work for default Tailwind colour palette 1`] = `
   "zinc-900": [
     "zinc",
     "900",
+  ],
+  "zinc-950": [
+    "zinc",
+    "950",
   ],
 }
 `;
