@@ -1,6 +1,15 @@
 import type { CSSRuleObject } from "tailwindcss/types/config";
 export { type CSSRuleObject };
 
+// From Tailwind TypeScript declaration file
+export type TailwindDarkModeConfig =
+  | "media"
+  | "class"
+  | ["class", string]
+  | "selector"
+  | ["selector", string]
+  | ["variant", string | string[]];
+
 export type ColourObject = {
   [key: string]: string | ColourObject;
 };
@@ -32,5 +41,5 @@ export type Options = {
 };
 
 export type ExtendedOptions = Options & {
-  darkModeSelector: string;
+  darkModeSelectors: string[];
 };

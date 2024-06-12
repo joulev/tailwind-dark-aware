@@ -11,18 +11,27 @@ import type {
   GenerateUtilsProps,
   Options,
   ExtendedOptions,
+  TailwindDarkModeConfig,
 } from "$types";
+
+function getDarkModeSelectors(config: TailwindDarkModeConfig): string[] {
+  const DEFAULT = ".dark";
+  if (config === "media") return ["@media (prefers-color-scheme: dark)"];
+  if (config === "class") return [`&:is(${DEFAULT} *)`];
+  if (config === "selector") return [`&:where(${DEFAULT}, ${DEFAULT} *)`];
+  const [mode, selector] = config;
+  if (mode === "class") return [`&:is(${selector} *)`];
+  if (mode === "selector") return [`&:where(${selector}, ${selector} *)`];
+  return Array.isArray(selector) ? selector : [selector];
+}
 
 export = plugin.withOptions<Partial<Options>>(
   (userOptions = {}) =>
     ({ matchUtilities, theme, config, corePlugins }) => {
-      const darkModeConfig = config("darkMode", "media") as "media" | "class" | ["class", string];
-      let darkModeSelector: string;
-      if (darkModeConfig === "media") darkModeSelector = "@media (prefers-color-scheme: dark)";
-      else if (darkModeConfig === "class") darkModeSelector = ".dark &";
-      else darkModeSelector = `${darkModeConfig[1]} &`;
+      const darkModeConfig = config("darkMode", "media") as TailwindDarkModeConfig;
+      const darkModeSelectors = getDarkModeSelectors(darkModeConfig);
 
-      const options: ExtendedOptions = { ...defaultOptions, ...userOptions, darkModeSelector };
+      const options: ExtendedOptions = { ...defaultOptions, ...userOptions, darkModeSelectors };
 
       function generateUtility({ className, themeName, func }: GenerateUtilsProps) {
         matchUtilities(
